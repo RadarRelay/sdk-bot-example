@@ -6,29 +6,29 @@ import BigNumber from 'bignumber.js';
 
 // CONFIG
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
-const API_ENDPOINT = 'https://api.kovan.radarrelay.com/v0';
-const WS_ENDPOINT = 'wss://ws.kovan.radarrelay.com/ws';
+const API_ENDPOINT = 'https://api.kovan.radarrelay.com/v2';
+const WS_ENDPOINT = 'wss://ws.kovan.radarrelay.com/v2';
 const KOVAN_RPC = 'https://kovan.infura.io';
 
 (async () => {
-  
+
   // Instantiate the SDK
   // -------------------
   console.log('Radar Relay Bot Powering Up 📡');
   console.log('------------------------------');
-  
+
   if(!WALLET_PASSWORD) {
     console.log(colors.red('password required: ') + colors.yellow('please run `export RADAR_WALLET_PASSWORD=yourpassword`'));
     process.exit();
   }
-  
+
   // Handle errors
   process.on('unhandledRejection', (reason, p) => {
     const message = reason.message ? reason.message.split('\n')[0] : reason;
     console.log(colors.red(message));
     process.exit(0);
   });
-  
+
   // Setup SDK
   // ---------
   const rr = SdkManager.Setup({
@@ -39,7 +39,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
     radarRestEndpoint: API_ENDPOINT,
     radarWebsocketEndpoint: WS_ENDPOINT
   });
-  
+
   // Listen to loading progress
   rr.events.on(EventName.Loading, data => {
     process.stdout.write('....');
@@ -47,10 +47,10 @@ const KOVAN_RPC = 'https://kovan.infura.io';
       process.stdout.write('🚀');
     }
   });
-  
+
   // Init wallet
   await SdkManager.InitializeAsync(rr);
-  
+
   // Get token rates
   // ---------------
   const ethTicker = JSON.parse(await request.get('https://api.coinmarketcap.com/v1/ticker/ethereum/'));
@@ -61,11 +61,11 @@ const KOVAN_RPC = 'https://kovan.infura.io';
 
   // Get balances
   // ------------
-  const zrxEthMarket = rr.markets.get('ZRX-WETH');  
+  const zrxEthMarket = rr.markets.get('ZRX-WETH');
   let curEthBal = await rr.account.getEthBalanceAsync();
   const curWethBal = await rr.account.getTokenBalanceAsync(zrxEthMarket.quoteTokenAddress);
   const curZrxBal  = await rr.account.getTokenBalanceAsync(zrxEthMarket.baseTokenAddress);
-    
+
   // Output data
   // -----------
   console.log("\n\n"+'Current Exchange Rates:');
@@ -90,10 +90,10 @@ const KOVAN_RPC = 'https://kovan.infura.io';
   }
 
   // Setup Wallet
-  // ------------------
+  // ------------
   console.log("\n"+'Setting Up Wallet:');
   console.log('------------------');
-  
+
   // Set WETH Allowance
   // ------------------
   const wethAllowance = await rr.account.getTokenAllowanceAsync(zrxEthMarket.quoteTokenAddress);
@@ -120,7 +120,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
   // Setup book subscription
   // -----------------------
   const subscription = await zrxEthMarket.subscribeAsync(WebsocketRequestTopic.BOOK, message => {
-    if (message.action && message.action === 'NEW' 
+    if (message.action && message.action === 'NEW'
     && message.event.order.signedOrder.maker === rr.account.address) {
       console.log('Order Placed! ' + colors.green(message.event.order.orderHash));
       console.log('Goodbye.');
@@ -129,7 +129,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
   });
 
   // Create ZRX Buy Order
-  // ---------------------
+  // --------------------
   console.log("\n" + `Creating ZRX/WETH buy order:`);
   console.log('----------------------------');
   await zrxEthMarket.limitOrderAsync(UserOrderType.BUY,
@@ -137,7 +137,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
     new BigNumber(String(zrxEthRate)),
     new BigNumber((new Date().getTime() / 1000) + 43200).floor() // 12 hours
   );
-  
-  
-  
+
+
+
 })();
