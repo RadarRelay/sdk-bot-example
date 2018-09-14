@@ -138,6 +138,4 @@ const KOVAN_RPC = 'https://kovan.infura.io';
     new BigNumber((new Date().getTime() / 1000) + 43200).floor() // 12 hours
   );
 
-
-
 })();
