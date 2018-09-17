@@ -11,7 +11,7 @@
   "author": "Mike Roth <mike@radarrelay.com>",
   "license": "MIT",
   "dependencies": {
-    "@radarrelay/sdk": "git://github.com/RadarRelay/sdk.git#iks-hf-fix-dist-imports",
+    "@radarrelay/sdk": "^2.0.1",
     "@radarrelay/types": "^1.1.0",
     "bignumber.js": "^4.1.0",
     "colors": "^1.3.0",
