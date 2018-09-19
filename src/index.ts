@@ -1,13 +1,13 @@
 import {SdkManager, EventName} from '@radarrelay/sdk';
 import {WebsocketRequestTopic, UserOrderType} from '@radarrelay/types';
 import colors = require('colors/safe');
-const request = require('request-promise');
+import request = require('request-promise');
 import BigNumber from 'bignumber.js';
 
 // CONFIG
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
-const API_ENDPOINT = 'https://api.kovan.radarrelay.com/v2';
-const WS_ENDPOINT = 'wss://ws.kovan.radarrelay.com/v2';
+const API_ENDPOINT = 'https://api.alpha-da24f79881b8c.radarrelay.com/v2';
+const WS_ENDPOINT = 'wss://api.alpha-da24f79881b8c.radarrelay.com/v2';
 const KOVAN_RPC = 'https://kovan.infura.io';
 
 (async () => {
@@ -61,7 +61,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
 
   // Get balances
   // ------------
-  const zrxEthMarket = rr.markets.get('ZRX-WETH');
+  const zrxEthMarket = await rr.getMarketAsync('ZRX-WETH');
   let curEthBal = await rr.account.getEthBalanceAsync();
   const curWethBal = await rr.account.getTokenBalanceAsync(zrxEthMarket.quoteTokenAddress);
   const curZrxBal  = await rr.account.getTokenBalanceAsync(zrxEthMarket.baseTokenAddress);
