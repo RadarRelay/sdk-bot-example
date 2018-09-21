@@ -6,8 +6,8 @@ import BigNumber from 'bignumber.js';
 
 // CONFIG
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
-const API_ENDPOINT = 'https://api.alpha-da24f79881b8c.radarrelay.com/v2';
-const WS_ENDPOINT = 'wss://api.alpha-da24f79881b8c.radarrelay.com/v2';
+const API_ENDPOINT = 'https://api.radarrelay.com/v2';
+const WS_ENDPOINT = 'wss://ws.radarrelay.com/v2';
 const KOVAN_RPC = 'https://kovan.infura.io';
 
 (async () => {
@@ -61,7 +61,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
 
   // Get balances
   // ------------
-  const zrxEthMarket = await rr.getMarketAsync('ZRX-WETH');
+  const zrxEthMarket = await rr.markets.getAsync('ZRX-WETH');
   let curEthBal = await rr.account.getEthBalanceAsync();
   const curWethBal = await rr.account.getTokenBalanceAsync(zrxEthMarket.quoteTokenAddress);
   const curZrxBal  = await rr.account.getTokenBalanceAsync(zrxEthMarket.baseTokenAddress);
