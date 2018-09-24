@@ -6,8 +6,8 @@ import BigNumber from 'bignumber.js';
 
 // CONFIG
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
-const API_ENDPOINT = 'https://api.radarrelay.com/v2';
-const WS_ENDPOINT = 'wss://ws.radarrelay.com/v2';
+const API_ENDPOINT = 'https://api-beta.rrdev.io/v2';
+const WS_ENDPOINT = 'wss://ws-beta.rrdev.io/v2';
 const KOVAN_RPC = 'https://kovan.infura.io/radar';
 
 (async () => {
@@ -133,8 +133,8 @@ const KOVAN_RPC = 'https://kovan.infura.io/radar';
   console.log("\n" + `Creating ZRX/WETH buy order:`);
   console.log('----------------------------');
   await zrxEthMarket.limitOrderAsync(UserOrderType.BUY,
-    new BigNumber('0.1'),
-    new BigNumber('0.00001'),
+    new BigNumber('1'),
+    new BigNumber(String(zrxEthRate)),
     new BigNumber((new Date().getTime() / 1000) + 43200).floor() // 12 hours
   );
 
