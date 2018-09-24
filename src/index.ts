@@ -79,7 +79,7 @@ const KOVAN_RPC = 'https://kovan.infura.io/radar';
   console.log(colors.green(`ZRX: ${curZrxBal.toNumber()}`));
 
   if (curEthBal.lte(0)) {
-    console.log("\n" + colors.yellow(`Visit https://faucet.kovan.radarrelay.com and enter your address: ${rr.account.address}`));
+    console.log("\n" + colors.yellow(`Visit https://faucet.kovan.network/ and enter your address: ${rr.account.address}`));
     process.stdout.write('Waiting for ETH...');
     while(curEthBal.lte(0)) {
       curEthBal = await rr.account.getEthBalanceAsync();
