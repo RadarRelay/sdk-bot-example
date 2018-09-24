@@ -8,7 +8,7 @@ import BigNumber from 'bignumber.js';
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
 const API_ENDPOINT = 'https://api.radarrelay.com/v2';
 const WS_ENDPOINT = 'wss://ws.radarrelay.com/v2';
-const KOVAN_RPC = 'https://kovan.infura.io';
+const KOVAN_RPC = 'https://kovan.infura.io/radar';
 
 (async () => {
 
@@ -121,7 +121,7 @@ const KOVAN_RPC = 'https://kovan.infura.io';
   // -----------------------
   const subscription = await zrxEthMarket.subscribeAsync(WebsocketRequestTopic.BOOK, message => {
     if (message.action && message.action === 'NEW'
-    && message.event.order.signedOrder.maker === rr.account.address) {
+    && message.event.order.signedOrder.makerAddress === rr.account.address) {
       console.log('Order Placed! ' + colors.green(message.event.order.orderHash));
       console.log('Goodbye.');
       process.exit();
@@ -133,8 +133,8 @@ const KOVAN_RPC = 'https://kovan.infura.io';
   console.log("\n" + `Creating ZRX/WETH buy order:`);
   console.log('----------------------------');
   await zrxEthMarket.limitOrderAsync(UserOrderType.BUY,
-    new BigNumber(String(Math.random() * 10)),
-    new BigNumber(String(zrxEthRate)),
+    new BigNumber('0.1'),
+    new BigNumber('0.00001'),
     new BigNumber((new Date().getTime() / 1000) + 43200).floor() // 12 hours
   );
 
