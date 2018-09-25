@@ -6,8 +6,8 @@ import BigNumber from 'bignumber.js';
 
 // CONFIG
 const WALLET_PASSWORD = process.env.RADAR_WALLET_PASSWORD; // NOTE: export RADAR_WALLET_PASSWORD=thewalletspassword
-const API_ENDPOINT = 'https://api-beta.rrdev.io/v2';
-const WS_ENDPOINT = 'wss://ws-beta.rrdev.io/v2';
+const API_ENDPOINT = 'https://api.radarrelay.com/v2';
+const WS_ENDPOINT = 'wss://ws.radarrelay.com/v2';
 const KOVAN_RPC = 'https://kovan.infura.io/radar';
 
 (async () => {
