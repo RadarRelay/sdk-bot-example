@@ -11,7 +11,7 @@
   "author": "Mike Roth <mike@radarrelay.com>",
   "license": "MIT",
   "dependencies": {
-    "@radarrelay/sdk": "^2.2.1",
+    "@radarrelay/sdk": "^2.2.2",
     "@radarrelay/types": "^1.2.1",
     "bignumber.js": "^4.1.0",
     "colors": "^1.3.0",
