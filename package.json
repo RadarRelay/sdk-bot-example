@@ -11,12 +11,15 @@
   "author": "Mike Roth <mike@radarrelay.com>",
   "license": "MIT",
   "dependencies": {
-    "@radarrelay/sdk": "^0.4.1",
-    "@radarrelay/types": "^0.1.1",
+    "@radarrelay/sdk": "^2.2.2",
+    "@radarrelay/types": "^1.2.1",
     "bignumber.js": "^4.1.0",
     "colors": "^1.3.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
     "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/request-promise": "~4.1.42"
   }
 }
