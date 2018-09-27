@@ -13,7 +13,7 @@ This repository contains the Radar Relay Bot example used in the [Building a Bot
 3. Run: `npm start` 
 
   The first time you run the bot it will output the wallet address and wait to receive Kovan ETH.
-  Enter the address into a [Kovan Faucet](https://faucet.kovan.radarrelay.com) to obtain Kovan ETH.
+  Enter the address into a [Kovan Faucet](https://faucet.kovan.network/) to obtain Kovan ETH.
 
 4. Once the ETH is received the bot will:
    1. Set WETH token allowance
