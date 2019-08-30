@@ -1,4 +1,7 @@
-# SDK Bot Example
+# DEPRECATED - Please use [0x Connect](https://0x.org/docs/connect#introduction)
+---
+
+## SDK Bot Example
 
 This repository contains the Radar Relay Bot example used in the [Building a Bot](https://developers.radarrelay.com/bot-tutorial) tutorial.
 
