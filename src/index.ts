@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import {SdkManager, EventName} from '@radarrelay/sdk';
 import {WebsocketRequestTopic, UserOrderType} from '@radarrelay/types';
 import colors = require('colors/safe');
@@ -23,7 +24,7 @@ const KOVAN_RPC = 'https://kovan.infura.io/radar';
   }
 
   // Handle errors
-  process.on('unhandledRejection', (reason, p) => {
+  process.on('unhandledRejection', (reason: Error | any, p) => {
     const message = reason.message ? reason.message.split('\n')[0] : reason;
     console.log(colors.red(message));
     process.exit(0);
